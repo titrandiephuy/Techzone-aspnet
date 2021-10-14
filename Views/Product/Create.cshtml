@@ -1,0 +1,61 @@
+﻿@model TechZone.Models.Product.CreateProduct
+
+@{
+    ViewData["Title"] = "Create";
+    var category = ViewBag.Category as TechZone.Entities.Category;
+}
+
+<div class="card-header py-3">
+    <h2 class="m-0 font-weight-bold text-primary">@category.CategoryName &gt; Create</h2>
+</div>
+<div class="card-body">
+    <div>
+        <form enctype="multipart/form-data" asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ProductName" class="control-label"></label>
+                <input asp-for="ProductName" class="form-control" />
+                <span asp-validation-for="ProductName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control" ></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Quantity" class="control-label"></label>
+                <input asp-for="Quantity" class="form-control" />
+                <span asp-validation-for="Quantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <img id="product-image" class="product_img-lg" src="~/images/no-picture.jpg" />
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="Pictures" name="Pictures" accept="image/*">
+                    <label class="custom-file-label" for="Pictures">Choose file</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <a class="btn btn-outline-secondary" asp-controller="Product" asp-action="Index" asp-route-catId="@category.CategoryId">
+                    <i class="fa fa-backward"> Back to List</i>
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+            $('#product-image').attr('src', window.URL.createObjectURL($(this)[0].files[0]))
+        });</script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

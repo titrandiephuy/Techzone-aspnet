@@ -1,0 +1,46 @@
+﻿@model Login
+@{
+    ViewData["Title"] = "Login";
+}
+<div class="register-login-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3">
+                <div class="login-form">
+                    <h2>Login</h2>
+                    <form asp-controller="Account" asp-action="Login" method="POST">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="group-input">
+                            <label asp-for="Email">Username or email address *</label>
+                            <input id="username" type="text" asp-for="Email" autofocus value="titrandiephuy@gmail.com">
+                            <input type="hidden" asp-for="ReturnUrl" value="@ViewBag.ReturnUrl" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="group-input">
+                            <label asp-for="Password" for="pass">Password *</label>
+                            <input class="form-control" asp-for="Password" value="Asdf123!" id="pass">
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        <div class="group-input gi-check">
+                            <div class="gi-more">
+                                <label for="save-pass">
+                                    Save Password
+                                    <input asp-for="RemenberMe" type="checkbox" id="save-pass">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <a href="#" class="forget-pass">Forget your Password</a>
+                            </div>
+                        </div>
+                        <button type="submit" class="site-btn login-btn">Sign In</button>
+                    </form>
+                    <div class="switch-login">
+                        <a asp-controller="Account" asp-action="Register" class="or-login">Or Create An Account</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

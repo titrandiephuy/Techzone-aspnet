@@ -1,0 +1,66 @@
+﻿@model List<Product>
+@using System.Globalization;
+@{
+    Layout = "_ShopLayout";
+
+    string currencyFormat(double number)
+    {
+        var info = CultureInfo.GetCultureInfo("vi-VN");
+        return String.Format(info, "{0:C0}", number);
+    }
+}
+
+<div class="col-lg-9 order-1 order-lg-2">
+    <div class="product-show-option">
+        <div class="row">
+            <div class="col-lg-7 col-md-7">
+                <div class="select-option">
+                    <select class="sorting" style="display: none;">
+                        <option value="">Default Sorting</option>
+                    </select><div class="nice-select sorting" tabindex="0"><span class="current">Default Sorting</span><ul class="list"><li data-value="" class="option selected">Default Sorting</li></ul></div>
+                    <select class="p-show" style="display: none;">
+                        <option value="">Show:</option>
+                    </select><div class="nice-select p-show" tabindex="0"><span class="current">Show:</span><ul class="list"><li data-value="" class="option selected">Show:</li></ul></div>
+                </div>
+            </div>
+            <div class="col-lg-5 col-md-5 text-right">
+                <p>Show 01- 09 Of 36 Product</p>
+            </div>
+        </div>
+    </div>
+    <div class="product-list">
+        <div class="row">
+            @foreach (var pro in Model)
+            {
+                <div class="col-lg-4 col-sm-6">
+
+                    <div class="product-item">
+                        <div class="pi-pic">
+                            <img src="~/images/@pro.Pictures" alt="">
+                            <div class="sale pp-sale">Sale</div>
+                            <div class="icon">
+                                <i class="icon_heart_alt"></i>
+                            </div>
+                            <ul>
+                                <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
+                                <li class="quick-view"><a asp-controller="Shop" asp-action="ProductDetail" asp-route-productId="@pro.ProductId">+ Quick View</a></li>
+                                <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="pi-text">
+                            <a href="#">
+                                <h5>@pro.ProductName</h5>
+                            </a>
+                            <div class="product-price">
+                                @currencyFormat(pro.Price)
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
+        </div>
+    </div>
+
+</div>

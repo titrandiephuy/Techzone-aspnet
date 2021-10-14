@@ -1,0 +1,75 @@
+﻿@model TechZone.Models.Product.DetailProduct
+
+@{
+    ViewData["Title"] = "Detail";
+    var category = ViewBag.Category as TechZone.Entities.Category;
+}
+
+<div class="card-header py-3">
+    <h1>@category.CategoryName &gt; Detail</h1>
+</div>
+
+<div class="card-body">
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ProductId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ProductId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ProductName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ProductName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PicturePath)
+        </dt>
+        <dd class="col-sm-10">
+
+            <img src="~/images/@Model.PicturePath" class="product_img-lg" />
+
+
+        </dd>
+    </dl>
+    <div>
+        <a asp-controller="Product" asp-action="Edit" asp-route-productId="@Model.ProductId" class="btn btn-success btn-icon-split">
+            <span class="icon text-white-50">
+                <i class="fas fa-check"></i>
+            </span>
+            <span class="text">Edit</span>
+        </a>
+        <a asp-controller="Product" asp-action="Remove" asp-route-productId="@Model.ProductId" class="btn btn-danger btn-icon-split">
+            <span class="icon text-white-50">
+                <i class="fas fa-trash"></i>
+            </span>
+            <span class="text">Remove</span>
+        </a>
+        <a asp-controller="Product" asp-action="Index" asp-route-catId="@category.CategoryId" class="btn btn-secondary btn-icon-split">
+            <span class="icon text-white-50">
+                <i class="fas fa-arrow-left"></i>
+            </span>
+            <span class="text">Back To List</span>
+        </a>
+    </div>
+</div>
+

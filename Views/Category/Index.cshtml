@@ -1,0 +1,72 @@
+﻿@model List<Category>
+@{
+    ViewData["Title"] = "Category";
+}
+
+
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <a asp-controller="Category" asp-action="Create" class="btn btn-primary">Create</a>
+    <hr />
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Category</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>#ID</th>
+                            <th>Category name</th>
+                            <th>Description</th>
+                            <th>Products</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>#ID</th>
+                            <th>Category name</th>
+                            <th>Description</th>
+                            <th>Products</th>
+                            <th>Action</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach (Category cat in Model)
+                        {
+                            <tr>
+                                <td>@cat.CategoryId</td>
+                                <td><i class="@cat.Picture"> @cat.CategoryName</i></td>
+                                <td>@cat.Description</td>
+                                <td class="text-center"><a title="show products" class="btn btn-outline-info btn-sm" asp-controller="Product" asp-action="Index" asp-route-catId="@cat.CategoryId">@cat.Products.Count()</a></td>
+                                <td class="text-right">
+                                    <a asp-controller="Category" asp-action="Edit" asp-route-catId="@cat.CategoryId" class="btn btn-warning btn-circle">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                    @if (cat.Status)
+                                    {
+                                        <a asp-controller="Category" asp-action="ChangeStatus" asp-route-catId="@cat.CategoryId" class="btn btn-circle btn-primary">
+                                            <i class="fa fa-lock"></i>
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a asp-controller="Category" asp-action="ChangeStatus" asp-route-catId="@cat.CategoryId" class="btn btn-circle btn-primary">
+                                            <i class="fa fa-lock-open"></i>
+                                        </a>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
